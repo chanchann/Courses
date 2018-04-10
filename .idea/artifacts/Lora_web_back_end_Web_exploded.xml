@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Lora_web_back_end:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lora_web_back_end_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Lora_web_back_end/web/Web" />
+    </root>
+  </artifact>
+</component>
