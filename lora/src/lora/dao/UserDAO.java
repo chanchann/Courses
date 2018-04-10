@@ -1,4 +1,4 @@
-package lora.lora.dao;
+package lora.dao;
 
 import lora.bean.User;
 import lora.util.DBUtil;
@@ -23,6 +23,7 @@ public class UserDAO
         {
             e.printStackTrace();
         }
+        return total;
     }
 
     public void add(User bean)
@@ -67,7 +68,7 @@ public class UserDAO
         try(Connection c=DBUtil.getConnection();Statement s=c.createStatement();)
         {
             String sql="delete from user where id="+id;
-            s.execute();
+            s.execute(sql);
         }
         catch(SQLException e)
         {
@@ -91,11 +92,12 @@ public class UserDAO
                 bean.setPassword(password);
                 bean.setId(id);
             }
-            catch(SQLException e)
-            {
-                e.printStackTrace();
-            }
-            return bean;
+
         }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return bean;
     }
 }

@@ -1,4 +1,4 @@
-package lora.lora.dao;
+package lora.dao;
 
 import lora.bean.Address;
 import lora.util.DBUtil;
@@ -118,19 +118,19 @@ public class AddressDAO
 
             while(rs.next())
             {
-                Address bean=new Address();
-                int id=rs.getInt(1);
-                String name=rs.getString(2);
+                Address bean = new Address();
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
                 bean.setId(id);
                 bean.setName(name);
                 beans.add(bean);
             }
-            catch(SQLException e)
-            {
-                e.printStackTrace();
-            }
-            return beans;
         }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return beans;
     }
 
 }
