@@ -28,7 +28,7 @@ CREATE TABLE appliance(
     name varchar(255) DEFAULT NULL,
     remark varchar(255) DEFAULT NULL,
     cid int(11) DEFAULT NULL,
-    Dates datetime DEFAULT NULL,
+    Date datetime DEFAULT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_appliance_room FOREIGN KEY(eid) REFERENCES room (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
