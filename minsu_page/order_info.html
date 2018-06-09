@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+</head>
+<style>
+body,table{
+    font-size: 12px;
+    font-family: Arial;
+}
+div.confirmPayPageDiv{
+    max-width: 1013px;
+    margin: 10px auto;
+}
+div.confirmPayImageDiv{
+    margin:5px auto 80px auto;
+    width: 900px;
+    position: relative;
+}
+
+div.confirmPayOrderInfoText{
+    margin: 10px 10px 0px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ADC8E6;
+}
+div.confirmPayOrderItemDiv{
+    margin: 0px 20px;
+}
+div.confirmPayOrderItemText{
+    margin: 20px 10px;
+    font-size: 14px;
+    font-weight:normal;
+    color: black;
+}
+table.confirmPayOrderItemTable{
+    border: 1px solid #DDDDDD;
+    width: 100%;
+}
+table.confirmPayOrderItemTable thead{
+    background-color: #E8F2FF;
+    height: 33px;
+}
+table.confirmPayOrderItemTable tr{
+    border: 1px solid #DDDDDD;
+}
+table.confirmPayOrderItemTable th, table.confirmPayOrderItemTable td{
+    text-align: center;
+}
+table.confirmPayOrderItemTable td{
+    padding: 20px;
+}
+td.confirmPayOrderItemProductLink{
+    text-align: left !important;
+}
+span.conformPayProductPrice{
+    font-size: 18px;
+    font-weight: bold;
+    color: #666666;
+}
+span.confirmPayOrderItemSumPrice{
+    color: #C40000;
+}
+a{
+    color:#999;
+}
+a:hover{
+    text-decoration:none;
+    color: #C40000;
+}
+</style>
+<div class="confirmPayPageDiv">
+
+    <div class="confirmPayOrderInfoDiv">
+        <div class="confirmPayOrderInfoText">我都订单</div>
+    </div>
+    <div class="confirmPayOrderItemDiv">
+        <div class="confirmPayOrderItemText">订单信息</div>
+        <table class="confirmPayOrderItemTable">
+            <thead>
+                <tr><th colspan="2">房屋</th>
+                <th width="120px">价格</th>
+                <th width="120px">数量</th>
+                <th width="120px">总支付 </th>
+            </tr></thead>
+                <tbody><tr>
+                    <td><img width="50px" src="images/a0002_011074_m.jpg"></td>
+                    <td class="confirmPayOrderItemProductLink">
+                        <a href="#nowhere">极致总统套房</a>
+                    </td>
+                    <td>￥990.00</td>
+                    <td>1</td>
+                    <td><span class="conformPayProductPrice">￥792.00</span></td>
+                </tr>
+                <tr>
+                    <td><img width="50px" src="images/--www.pakutaso.com-shared-img-thumb-HOTEL86_washitunoocya20150124135505.jpg"></td>
+                    <td class="confirmPayOrderItemProductLink">
+                        <a href="#nowhere">可爱小公主套房</a>
+                    </td>
+                    <td>￥5,680.00</td>
+                    <td>1</td>
+                    <td><span class="conformPayProductPrice">￥3,692.00</span></td>
+
+                </tr>
+        </tbody></table>
+        <div class="confirmPayOrderItemText pull-right">
+            实付款： <span class="confirmPayOrderItemSumPrice">￥4,484.00</span>
+        </div>
+    </div>
+</div>

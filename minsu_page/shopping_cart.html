@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+<link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+</head>
+<style>
+body{
+    font-size: 12px;
+    font-family: Arial;
+}
+a{
+    color:#999;
+}
+a:hover{
+    text-decoration:none;
+    color: #C40000;
+}
+div.cartProductChangeNumberDiv a {
+    width: 14px;
+    display: inline-block;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+}
+img.cartProductItemIfSelected, img.selectAllItem {
+    cursor: pointer;
+}
+tr.cartProductItemTR {
+    border: 1px solid #CCCCCC;
+}
+div.cartProductChangeNumberDiv {
+    border: solid 1px #E5E5E5;
+    width: 80px;
+}
+table.cartProductTable {
+    width: 100%;
+    font-size:12px;
+}
+span.cartProductItemOringalPrice {
+    text-decoration: line-through;
+    color: #9C9C9C;
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+div.cartProductChangeNumberDiv input {
+    border: solid 1px #AAAAAA;
+    width: 42px;
+    display: inline-block;
+}
+div.cartProductChangeNumberDiv a {
+    text-decoration: none;
+}
+img.cartProductImg {
+    padding: 1px;
+    border: 1px solid #EEEEEE;
+    width: 80px;
+    height: 80px;
+}
+a.cartProductLink {
+    color: #3C3C3C;
+}
+a.cartProductLink:hover {
+    color: #C40000;
+    text-decoration: underline;
+}
+div.cartProductLinkOutDiv {
+    position: relative;
+    height: 80px;
+}
+span.cartSumNumber {
+    color: #C40000;
+    font-weight: bold;
+    font-size: 16px;
+}
+tr.cartProductItemTR td {
+    padding: 20px 20px;
+}
+span.cartSumPrice {
+    color: #C40000;
+    font-weight: bold;
+    font-size: 20px;
+}
+span.cartProductItemPromotionPrice {
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    color: #C40000;
+}
+span.cartProductItemSmallSumPrice {
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    color: #C40000;
+}
+span.cartTitlePrice {
+    color: #C40000;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 3px;
+}
+div.cartProductLinkInnerDiv {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+}
+div.cartTitle button {
+    background-color: #AAAAAA;
+    border: 1px solid #AAAAAA;
+    color: white;
+    width: 53px;
+    height: 25px;
+    border-radius: 2px;
+}
+div.cartFoot {
+    background-color: #E5E5E5;
+    line-height: 50px;
+    margin: 20px 0px;
+    color: black;
+    padding-left: 20px;
+}
+div.cartFoot button {
+    background-color: #AAAAAA;
+    border: 0px solid #AAAAAA;
+    color: white;
+    height: 100%;
+    width: 120px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+table.cartProductTable th {
+    font-weight: normal;
+    color: #3C3C3C;
+    padding: 20px 20px;
+}
+table.cartProductTable th.selectAndImage{
+    width:140px;
+}
+table.cartProductTable th.operation{
+    width:30px;
+}
+div.cartDiv {
+    max-width: 1013px;
+    margin: 10px auto;
+    color: black;
+}
+</style>
+<script>
+function formatMoney(num){
+    num = num.toString().replace(/\$|\,/g,'');
+    if(isNaN(num))
+        num = "0";
+    sign = (num == (num = Math.abs(num)));
+    num = Math.floor(num*100+0.50000000001);
+    cents = num%100;
+    num = Math.floor(num/100).toString();
+    if(cents<10)
+    cents = "0" + cents;
+    for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+    num = num.substring(0,num.length-(4*i+3))+','+
+    num.substring(num.length-(4*i+3));
+    return (((sign)?'':'-') + num + '.' + cents);
+}
+
+$(function(){
+    $("img.cartProductItemIfSelected").click(function(){
+        var selectit = $(this).attr("selectit")
+        if("selectit"==selectit){
+            $(this).attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+            $(this).attr("selectit","false")
+            $(this).parents("tr.cartProductItemTR").css("background-color","#fff");
+        }
+        else{
+            $(this).attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+            $(this).attr("selectit","selectit")
+            $(this).parents("tr.cartProductItemTR").css("background-color","#FFF8E1");
+        }
+        syncSelect();
+        syncCreateOrderButton();
+        calcCartSumPriceAndNumber();
+    });
+    $("img.selectAllItem").click(function(){
+        var selectit = $(this).attr("selectit")
+        if("selectit"==selectit){
+            $("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+            $("img.selectAllItem").attr("selectit","false")
+            $(".cartProductItemIfSelected").each(function(){
+                $(this).attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+                $(this).attr("selectit","false");
+                $(this).parents("tr.cartProductItemTR").css("background-color","#fff");
+            });
+        }
+        else{
+            $("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+            $("img.selectAllItem").attr("selectit","selectit")
+            $(".cartProductItemIfSelected").each(function(){
+                $(this).attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+                $(this).attr("selectit","selectit");
+                $(this).parents("tr.cartProductItemTR").css("background-color","#FFF8E1");
+            });
+        }
+        syncCreateOrderButton();
+        calcCartSumPriceAndNumber();
+    });
+    $(".orderItemNumberSetting").keyup(function(){
+        var pid=$(this).attr("pid");
+        var stock= $("span.orderItemStock[pid="+pid+"]").text();
+        var price= $("span.orderItemPromotePrice[pid="+pid+"]").text();
+        var num= $(".orderItemNumberSetting[pid="+pid+"]").val();
+        num = parseInt(num);
+        if(isNaN(num))
+            num= 1;
+        if(num<=0)
+            num = 1;
+        if(num>stock)
+            num = stock;
+        syncPrice(pid,num,price);
+    });
+    $(".numberPlus").click(function(){
+        var pid=$(this).attr("pid");
+        var stock= $("span.orderItemStock[pid="+pid+"]").text();
+        var price= $("span.orderItemPromotePrice[pid="+pid+"]").text();
+        var num= $(".orderItemNumberSetting[pid="+pid+"]").val();
+        num++;
+        if(num>stock)
+            num = stock;
+        syncPrice(pid,num,price);
+    });
+    $(".numberMinus").click(function(){
+        var pid=$(this).attr("pid");
+        var stock= $("span.orderItemStock[pid="+pid+"]").text();
+        var price= $("span.orderItemPromotePrice[pid="+pid+"]").text();
+        var num= $(".orderItemNumberSetting[pid="+pid+"]").val();
+        --num;
+        if(num<=0)
+            num=1;
+        syncPrice(pid,num,price);
+    });
+
+})
+function syncCreateOrderButton(){
+    var selectAny = false;
+    $(".cartProductItemIfSelected").each(function(){
+        if("selectit"==$(this).attr("selectit")){
+            selectAny = true;
+        }
+    });
+    if(selectAny){
+        $("button.createOrderButton").css("background-color","#C40000");
+        $("button.createOrderButton").removeAttr("disabled");
+    }
+    else{
+        $("button.createOrderButton").css("background-color","#AAAAAA");
+        $("button.createOrderButton").attr("disabled","disabled");
+    }
+}
+function syncSelect(){
+    var selectAll = true;
+    $(".cartProductItemIfSelected").each(function(){
+        if("false"==$(this).attr("selectit")){
+            selectAll = false;
+        }
+    });
+    if(selectAll)
+        $("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartSelected.png");
+    else
+        $("img.selectAllItem").attr("src","http://how2j.cn/tmall/img/site/cartNotSelected.png");
+}
+function calcCartSumPriceAndNumber(){
+    var sum = 0;
+    var totalNumber = 0;
+    $("img.cartProductItemIfSelected[selectit='selectit']").each(function(){
+        var oiid = $(this).attr("oiid");
+        var price =$(".cartProductItemSmallSumPrice[oiid="+oiid+"]").text();
+        price = price.replace(/,/g, "");
+        price = price.replace(/￥/g, "");
+        sum += new Number(price);
+        var num =$(".orderItemNumberSetting[oiid="+oiid+"]").val();
+        totalNumber += new Number(num);
+    });
+    $("span.cartSumPrice").html("￥"+formatMoney(sum));
+    $("span.cartTitlePrice").html("￥"+formatMoney(sum));
+    $("span.cartSumNumber").html(totalNumber);
+}
+function syncPrice(pid,num,price){
+    $(".orderItemNumberSetting[pid="+pid+"]").val(num);
+    var cartProductItemSmallSumPrice = formatMoney(num*price);
+    $(".cartProductItemSmallSumPrice[pid="+pid+"]").html("￥"+cartProductItemSmallSumPrice);
+    calcCartSumPriceAndNumber();
+}
+</script>
+<div class="cartDiv">
+    <div class="cartTitle pull-right">
+        <span>已选房屋</span>
+        <span class="cartTitlePrice">￥0.00</span>
+        <button class="createOrderButton" style="background-color: rgb(170, 170, 170);" disabled="disabled">结 算</button>
+    </div>
+    <div class="cartProductList">
+        <table class="cartProductTable">
+            <thead>
+                <tr>
+                    <th class="selectAndImage">
+                            <img src="http://how2j.cn/tmall/img/site/cartNotSelected.png" class="selectAllItem" selectit="false">
+                    全选
+                    </th>
+                    <th>房屋信息</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th width="120px">金额</th>
+                    <th class="operation">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr class="cartProductItemTR" oiid="936" style="background-color: rgb(255, 255, 255);">
+                        <td>
+                            <img src="http://how2j.cn/tmall/img/site/cartNotSelected.png" class="cartProductItemIfSelected" oiid="936" selectit="false">
+                            <a href="#nowhere" style="display:none"><img src="http://how2j.cn/tmall/img/site/cartSelected.png"></a>
+                            <img src="images/--www.pakutaso.com-shared-img-thumb-HOTEL86_washitunoocya20150124135505.jpg" class="cartProductImg">
+                        </td>
+                        <td>
+                            <div class="cartProductLinkOutDiv">
+                                <a class="cartProductLink" href="#nowhere">超级可爱公主房</a>
+                                <div class="cartProductLinkInnerDiv">
+                                    <img title="支持信用卡支付" src="http://how2j.cn/tmall/img/site/creditcard.png">
+                                    <img title="消费者保障服务,承诺7天退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                    <img title="消费者保障服务,承诺如实描述" src="http://how2j.cn/tmall/img/site/promise.png">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="cartProductItemOringalPrice">￥7580.0</span>
+                            <span class="cartProductItemPromotionPrice">￥5306.0</span>
+                        </td>
+                        <td>
+                            <div class="cartProductChangeNumberDiv">
+                                <span pid="365" class="hidden orderItemStock ">75</span>
+                                <span pid="365" class="hidden orderItemPromotePrice ">5306.0</span>
+                                <a href="#nowhere" class="numberMinus" pid="365">-</a>
+                                <input value="1" autocomplete="off" class="orderItemNumberSetting" oiid="936" pid="365">
+                                <a href="#nowhere" class="numberPlus" pid="365" stock="75">+</a>
+                            </div>
+                         </td>
+                        <td>
+                            <span pid="365" oiid="936" class="cartProductItemSmallSumPrice">
+                            ￥5,306.00
+                            </span>
+                        </td>
+                        <td>
+                            <a href="#nowhere" oiid="936" class="deleteOrderItem">删除</a>
+                        </td>
+                    </tr>
+                    <tr class="cartProductItemTR" oiid="935" style="background-color: rgb(255, 255, 255);">
+                        <td>
+                            <img src="http://how2j.cn/tmall/img/site/cartNotSelected.png" class="cartProductItemIfSelected" oiid="935" selectit="false">
+                            <a href="#nowhere" style="display:none"><img src="http://how2j.cn/tmall/img/site/cartSelected.png"></a>
+                            <img src="images/--www.pakutaso.com-shared-img-thumb-HOTEL86_washitunoocya20150124135505.jpg" class="cartProductImg">
+                        </td>
+                        <td>
+                            <div class="cartProductLinkOutDiv">
+                                <a class="cartProductLink" href="#nowhere">超级豪华总统套房</a>
+                                <div class="cartProductLinkInnerDiv">
+                                    <img title="支持信用卡支付" src="http://how2j.cn/tmall/img/site/creditcard.png">
+                                    <img title="消费者保障服务,承诺7天退货" src="http://how2j.cn/tmall/img/site/7day.png">
+                                    <img title="消费者保障服务,承诺如实描述" src="http://how2j.cn/tmall/img/site/promise.png">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="cartProductItemOringalPrice">￥235.0</span>
+                            <span class="cartProductItemPromotionPrice">￥152.75</span>
+                        </td>
+                        <td>
+                            <div class="cartProductChangeNumberDiv">
+                                <span pid="809" class="hidden orderItemStock ">17</span>
+                                <span pid="809" class="hidden orderItemPromotePrice ">152.75</span>
+                                <a href="#nowhere" class="numberMinus" pid="809">-</a>
+                                <input value="1" autocomplete="off" class="orderItemNumberSetting" oiid="935" pid="809">
+                                <a href="#nowhere" class="numberPlus" pid="809" stock="17">+</a>
+                            </div>
+                         </td>
+                        <td>
+                            <span pid="809" oiid="935" class="cartProductItemSmallSumPrice">
+                            ￥152.75
+                            </span>
+                        </td>
+                        <td>
+                            <a href="#nowhere" oiid="935" class="deleteOrderItem">删除</a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="cartFoot">
+        <img src="http://how2j.cn/tmall/img/site/cartNotSelected.png" class="selectAllItem" selectit="false">
+        <span>全选</span>
+<!--         <a href="#">删除</a> -->
+        <div class="pull-right">
+            <span>已选房屋 <span class="cartSumNumber">0</span> 件</span>
+            <span>合计: </span>
+            <span class="cartSumPrice">￥0.00</span>
+            <button class="createOrderButton" style="background-color: rgb(170, 170, 170);" disabled="disabled">结  算</button>
+        </div>
+    </div>
+</div>
