@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{多项式插值及其误差估计}{3}{0}{1}
+\beamer@sectionintoc {2}{三次样条插值}{30}{0}{2}

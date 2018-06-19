@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{课程简介及概论}{3}{0}{1}
+\beamer@sectionintoc {2}{数字的计算机表达及算法初步}{10}{0}{2}
+\beamer@subsectionintoc {2}{1}{二进制与十进制}{11}{0}{2}
+\beamer@subsectionintoc {2}{2}{浮点数}{14}{0}{2}
+\beamer@subsectionintoc {2}{3}{浮点数的加法运算}{18}{0}{2}
+\beamer@subsectionintoc {2}{4}{计算方法初步}{20}{0}{2}
+\beamer@sectionintoc {3}{微积分知识回顾}{28}{0}{3}

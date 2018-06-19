@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{法方程的导出}{3}{0}{1}
+\beamer@sectionintoc {2}{最小二乘数据拟合}{13}{0}{2}
+\beamer@sectionintoc {3}{数据拟合模型}{24}{0}{3}
+\beamer@subsectionintoc {3}{1}{周期性数据}{25}{0}{3}
+\beamer@subsectionintoc {3}{2}{数据线性化}{33}{0}{3}

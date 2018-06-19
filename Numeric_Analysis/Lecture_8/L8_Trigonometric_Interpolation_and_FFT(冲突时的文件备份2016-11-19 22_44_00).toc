@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{离散傅立叶变换和快速傅立叶变换}{3}{0}{1}
+\beamer@sectionintoc {2}{三角插值}{9}{0}{2}
+\beamer@sectionintoc {3}{快速傅立叶变换与信号处理}{10}{0}{3}

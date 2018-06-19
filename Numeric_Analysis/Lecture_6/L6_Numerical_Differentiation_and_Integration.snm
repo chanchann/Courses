@@ -1,0 +1,11 @@
+\beamer@slide {eq: foward difference}{4}
+\beamer@slide {eq: foward difference exp(x)}{11}
+\beamer@slide {eq: centered difference exp(x)}{11}
+\beamer@slide {eq: extrapolation 1}{15}
+\beamer@slide {eq: integral parabola 1}{21}
+\beamer@slide {eq: integral parabola 2}{21}
+\beamer@slide {eq: trapezoid rule original}{23}
+\beamer@slide {eq: trapezoid rule}{24}
+\beamer@slide {eq: trapezoid rule error}{25}
+\beamer@slide {eq: simpson rule original}{26}
+\beamer@slide {eq: simpson rule}{27}

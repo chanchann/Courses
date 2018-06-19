@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{离散傅立叶变换}{3}{0}{1}
+\beamer@sectionintoc {2}{三角插值}{11}{0}{2}
+\beamer@sectionintoc {3}{正交插值和三角函数最小二乘拟合}{19}{0}{3}
+\beamer@subsectionintoc {3}{1}{正交插值}{19}{0}{3}
+\beamer@subsectionintoc {3}{2}{三角函数最小二乘拟合}{27}{0}{3}

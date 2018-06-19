@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{对称正定矩阵的分解法}{3}{0}{1}
+\beamer@sectionintoc {2}{基本迭代法}{13}{0}{2}
+\beamer@sectionintoc {3}{求解非线性方程组}{38}{0}{3}

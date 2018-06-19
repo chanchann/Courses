@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {english}
+\beamer@sectionintoc {1}{求解非线性方程概述}{3}{0}{1}
+\beamer@sectionintoc {2}{二分法}{4}{0}{2}
+\beamer@sectionintoc {3}{不动点迭代}{11}{0}{3}
+\beamer@sectionintoc {4}{牛顿迭代}{26}{0}{4}
+\beamer@sectionintoc {5}{无导数求解非线性方程}{42}{0}{5}
