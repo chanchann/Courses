@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form method="post">
+    {{ form.csrf_token() }}
+    国家编码:{{form.n_nationkey}}<br>
+    国家名称：{{form.n_name}}<br>
+    所属地区：{{form.n_regionkey}}<br>
+    备注：{{form.n_comment}}<br>
+
+    {{form.submit}}
+</form>  
+
+
+<hr>
+
+
+</body>
+</html>

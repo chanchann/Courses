@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form method="post">
+    {{ form.csrf_token() }}
+    订单id:{{form.o_orderkey}}<br>
+    顾客编号：{{form.o_custkey}}<br>
+    订单状态：{{form.o_orderstatus}}<br>
+    订单金额：{{form.o_totalprice}}<br>
+    订单日期:{{form.o_orderdate}}<br>
+    优先级:{{form.o_orderpriority}}<br>
+    制单员:{{form.o_clerk}}<br>
+    运输优先级:{{form.o_shippriority}}<br>
+    备注:{{form.o_comment}}<br>
+
+    {{form.submit}}
+</form>  
+
+
+<hr>
+
+
+</body>
+</html>

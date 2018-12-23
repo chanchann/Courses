@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}通知方式查询{% endblock %}
+{% block navbar %}
+<section class="content-header">
+    <h1>通知方式查询</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active">通知方式管理</li>
+        <li class="active">通知方式查询</li>
+    </ol>
+</section>
+{% endblock %}
+
+{% block content %}
+<!-- <form method="post" action="/"  method = "post">
+  <div class="form-group">
+      <label>输入顾客id号查询 <font style="color:#a94442" size="2">
+      <input class="form-control" id="data" name="data">
+  </div>
+  <div class="form-group">
+      <button  type="submit" class="btn btn-default">Submit &nbsp</button>
+  </div>
+</form> -->
+ <!-- 搜索栏 -->
+ <div class="container-fluid">
+    <div class="row">
+      <div class=" col-md-offset-7 col-md-4">
+        <form class="navbar-form navbar-right" role="search" action="/customer/search/">
+            <div class="form-group">
+                <input name='c_custkey' type="text" class="form-control" placeholder="输入顾客id">
+            </div>
+            <button type="submit" class="btn btn-primary">查找顾客</button>
+        </form>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+</div>
+<!-- 搜索栏结束 -->
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        {% include 'message.html' %}
+    </div>
+
+    <div class="box-body">
+        {% if form%}
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>地址</th>
+                <th>号码</th>
+                <th>评论</th>
+                <th>编辑</th>
+                <th>删除</th>
+            </tr>
+            {% for customer in customers  %}
+            <tr>
+                <td>{{customer.c_custkey}}</td>
+                <td>{{customer.c_name}}</td>
+                <td>{{customer.c_address}}</td>
+                <td>{{customer.c_phone}}</td>
+                <td>{{customer.c_comment}}</td>
+               
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href="{{ url_for('edit_customer' ,id=customer.c_custkey) }}"></a></td>
+                <td><a class='fa fa-lg fa-warning text-light-blue'
+                    href=" {{ url_for('delete_customer' ,customer_id=customer.c_custkey) }} "></a></td>
+                <td><a class='fa fa-lg fa-warning text-red' href=''></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+
+
+    <form action='/add_customer' method="post">
+
+        <input type="submit" value="增加顾客">
+    </form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function initPage() {
+        slide_value = $(".slider").val() == "" ? 50 : parseInt($(".slider").val());
+        $(".slider").slider({
+            id: "blue",
+            max: 100,
+            value: slide_value
+        });
+
+        $('.status').bootstrapSwitch();
+        $(".status").on("switchChange.bootstrapSwitch", function (event, state) {
+            switchStatus($(this).data("id"), state, this);
+        });
+    }
+    function switchStatus(id, status, switchBox) {
+        restTemplate("PUT", "/notifies/" + id + "/status/" + status, null, function () {
+            $($(switchBox)).bootstrapSwitch("state", status);
+        });
+    }
+</script>
+
+{% endblock %}
