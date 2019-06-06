@@ -199,3 +199,16 @@
 [draw.io](https://www.draw.io/)
 
 [cs236](https://deepgenerativemodels.github.io/)
+
+[taiwan ML](https://interactiveuandmetutorials.weebly.com/)
+
+[a great GAN blog](http://jakublangr.com/)
+
+[python source code analysis](https://www.kancloud.cn/shusheng/python_source/140787)
+
+[stat online](https://newonlinecourses.science.psu.edu/statprogram/))
+
+[PGM ZH](https://blog.csdn.net/polly_yang/article/details/9617541)
+
+
+
