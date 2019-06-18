@@ -208,7 +208,9 @@
 
 [stat online](https://newonlinecourses.science.psu.edu/statprogram/))
 
-[PGM ZH](https://blog.csdn.net/polly_yang/article/details/9617541)
+[PGM ZH](https://blog.csdn.net/thither_shore/article/details/52185758)
+
+[ML resources](https://sgfin.github.io/learning-resources/)
 
 
 
