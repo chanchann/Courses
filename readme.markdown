@@ -213,4 +213,4 @@
 [ML resources](https://sgfin.github.io/learning-resources/)
 
 
-
+[c projects](https://www.ezlippi.com/blog/2014/12/c-open-project.html)
